@@ -10,29 +10,28 @@
       margin: 0;
       padding: 24px;
       font-family: system-ui, sans-serif;
-      background: #fff;
-      color: #000;
+      background: white;
+      color: black;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
+      gap: 16px;
     }
 
     a {
       display: block;
-      border: 1px solid #000;
+      border: 1px solid black;
     }
 
     img {
       width: 100%;
-      height: auto;
       display: block;
     }
   </style>
@@ -43,26 +42,26 @@
 <div class="grid" id="grid"></div>
 
 <script>
-  const USER = "YOUR_USERNAME";
-  const REPO = "YOUR_REPO";
-  const FOLDER = "qoutes";
+  // CHANGE THESE TWO LINES ONLY
+  const USER = "YOUR_GITHUB_USERNAME";
+  const REPO = "YOUR_REPO_NAME";
 
-  fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/${FOLDER}`)
+  fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/qoutes`)
     .then(r => r.json())
     .then(files => {
       const grid = document.getElementById("grid");
 
       files
-        .filter(f => /\.(png|jpe?g|webp|gif|svg)$/i.test(f.name))
+        .filter(f => f.type === "file" && /\.(png|jpe?g|webp|gif|svg)$/i.test(f.name))
         .forEach(f => {
-          const link = document.createElement("a");
-          link.href = `${FOLDER}/${f.name}`;
+          const a = document.createElement("a");
+          a.href = `qoutes/${f.name}`;
 
           const img = document.createElement("img");
-          img.src = `${FOLDER}/${f.name}`;
+          img.src = `qoutes/${f.name}`;
 
-          link.appendChild(img);
-          grid.appendChild(link);
+          a.appendChild(img);
+          grid.appendChild(a);
         });
     });
 </script>
