@@ -46,7 +46,7 @@
   const USER = "V-theghost";
   const REPO = "TheCuntFiles";
 
-  fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/quotes`)
+  fetch(`https://api.github.com/repos/${USER}/${REPO}/contents/qoutes`)
     .then(r => r.json())
     .then(files => {
       const grid = document.getElementById("grid");
@@ -55,10 +55,10 @@
         .filter(f => f.type === "file" && /\.(png|jpe?g|webp|gif|svg)$/i.test(f.name))
         .forEach(f => {
           const a = document.createElement("a");
-          a.href = `quotes/${f.name}`;
+          a.href = `qoutes/${f.name}`;
 
           const img = document.createElement("img");
-          img.src = `quotes/${f.name}`;
+          img.src = `qoutes/${f.name}`;
 
           a.appendChild(img);
           grid.appendChild(a);
